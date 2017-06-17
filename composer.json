@@ -4,10 +4,12 @@
     "type": "wordpress-plugin",
     "license": "proprietary",
     "authors": [
-        {
-            "name": "Johan Martin",
-            "email": "martin.johan@johan-martin.com"
-        }
+    {
+        "name": "Johan Martin",
+        "homepage": "http://www.johan-martin.com",
+        "email": "martin.johan@johan-martin.com",
+        "role": "developer"
+    }
     ],
     "keywords":[
         "alicart",
