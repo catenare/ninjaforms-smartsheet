@@ -1,0 +1,13 @@
+{
+    "name": "catenare/ninja-forms-smartsheet",
+    "description": "Add form data to smartsheet",
+    "type": "wordpress-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Johan Martin",
+            "email": "martin.johan@johan-martin.com"
+        }
+    ],
+    "require": {}
+}
