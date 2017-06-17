@@ -1,5 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
+require 'vendor/autoload.php';
 /*
  * Plugin Name: Ninja Forms - smartsheet
  * Plugin URI: https://github.com/catenare/ninjaforms-smartsheet

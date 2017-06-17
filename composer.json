@@ -9,5 +9,18 @@
             "email": "martin.johan@johan-martin.com"
         }
     ],
-    "require": {}
+    "keywords":[
+        "alicart",
+        "ninja-forms",
+        "smartsheet"
+    ],
+    "require": {
+        "catenare/smartsheet": "dev-master"
+    },
+    "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/catenare/smartsheet-api"
+    }
+  ]
 }
