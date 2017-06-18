@@ -1,6 +1,7 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;
 
 require 'vendor/autoload.php';
+
 /*
  * Plugin Name: Ninja Forms - smartsheet
  * Plugin URI: https://github.com/catenare/ninjaforms-smartsheet
@@ -86,12 +87,12 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
             /*
              * Required for all Extensions.
              */
-            add_action( 'admin_init', array( $this, 'setup_license') );
+//            add_action( 'admin_init', array( $this, 'setup_license') );
 
             /*
              * Optional. If your extension creates a new field interaction or display template...
              */
-            add_filter( 'ninja_forms_register_fields', array($this, 'register_fields'));
+//            add_filter( 'ninja_forms_register_fields', array($this, 'register_fields'));
 
             /*
              * Optional. If your extension processes or alters form submission data on a per form basis...
@@ -101,7 +102,7 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
             /*
              * Optional. If your extension collects a payment (ie Strip, PayPal, etc)...
              */
-            add_filter( 'ninja_forms_register_payment_gateways', array($this, 'register_payment_gateways'));
+//            add_filter( 'ninja_forms_register_payment_gateways', array($this, 'register_payment_gateways'));
         }
 
         /**

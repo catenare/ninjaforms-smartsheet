@@ -32,7 +32,7 @@ final class NF_Smartsheet_Actions_SmartsheetExample extends NF_Abstracts_Action
 {
     parent::__construct();
 
-    $this->_nicename = __( 'smartsheet Example Action', 'ninja-forms' );
+    $this->_nicename = __( 'Save to Smartsheet', 'ninja-forms' );
 }
 
     /*
@@ -46,6 +46,8 @@ final class NF_Smartsheet_Actions_SmartsheetExample extends NF_Abstracts_Action
 
     public function process( $action_settings, $form_id, $data )
     {
+    	error_log($action_settings);
+
         return $data;
     }
 }
