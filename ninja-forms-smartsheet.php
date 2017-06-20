@@ -87,33 +87,20 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
             /*
              * Required for all Extensions.
              */
-//            add_action( 'admin_init', array( $this, 'setup_license') );
-
-            /*
-             * Optional. If your extension creates a new field interaction or display template...
-             */
-//            add_filter( 'ninja_forms_register_fields', array($this, 'register_fields'));
+            add_action( 'admin_init', array( $this, 'setup_license') );
+	        
 
             /*
              * Optional. If your extension processes or alters form submission data on a per form basis...
              */
-            add_filter( 'ninja_forms_register_actions', array($this, 'register_actions'));
+            add_filter('ninja_forms_register_actions', array($this, 'register_actions'));
+            add_filter('ninja_forms_plugin_settings', array($this, 'plugin_settings'));
+            add_filter('ninja_forms_plugin_settings_groups', array($this, 'plugin_settings_groups'));
+            add_filter('ninja_forms_update_setting_smartsheet', array($this, 'save_smartsheet_settings'));
+//	        add_action( 'ninja_forms_after_submission', array($this,'ninja_forms_after_submission') );
 
-            /*
-             * Optional. If your extension collects a payment (ie Strip, PayPal, etc)...
-             */
-//            add_filter( 'ninja_forms_register_payment_gateways', array($this, 'register_payment_gateways'));
         }
 
-        /**
-         * Optional. If your extension creates a new field interaction or display template...
-         */
-        public function register_fields($actions)
-        {
-            $actions[ 'smartsheet' ] = new NF_Smartsheet_Fields_SmartsheetExample(); // includes/Fields/SmartsheetExample.php
-
-            return $actions;
-        }
 
         /**
          * Optional. If your extension processes or alters form submission data on a per form basis...
@@ -125,15 +112,6 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
             return $actions;
         }
 
-        /**
-         * Optional. If your extension collects a payment (ie Strip, PayPal, etc)...
-         */
-        public function register_payment_gateways($payment_gateways)
-        {
-            $payment_gateways[ 'smartsheet' ] = new NF_Smartsheet_PaymentGateways_SmartsheetExample(); // includes/PaymentGateways/SmartsheetExample.php
-
-            return $payment_gateways;
-        }
 
         /*
          * Optional methods for convenience.
@@ -190,7 +168,79 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
 
             new NF_Extension_Updater( self::NAME, self::VERSION, self::AUTHOR, __FILE__, self::SLUG );
         }
+
+        public function plugin_settings( $settings ) {
+        	$settings['smartsheet'] = array(
+        		'token' => array(
+        			'id' => 'token',
+			        'type' => 'textbox',
+			        'width' => 'one-half',
+			        'label' => __('Token', 'ninja-forms-smartsheet'),
+			        'desc' => __('Smartsheet Token Value', 'ninja-forms-smartsheet')
+		        ),
+		        'api' => array(
+		        	'id' => 'api',
+			        'type' => 'textbox',
+		            'width' => 'one-half',
+		            'label' => __('Url', 'ninja-forms-smartsheet'),
+			        'desc' => __('Smartsheet Url Value', 'ninja-forms-smartsheet')
+		        )
+	        );
+        	return $settings;
+        }
+
+        public function plugin_settings_groups($groups)
+        {
+        	$groups['smartsheet'] = array(
+        	    'id' => 'smartsheet',
+		        'label' => __('Smartsheet Settings', 'ninja-forms-smartsheet'),
+	        );
+        }
+
+        public function save_smartsheet_settings($settings_value)
+        {
+        	if( strpos($settings_value, '_')) {
+        		$parts = exploded('_', $settings_value);
+
+		        foreach ( $parts as $key => $value ) {
+			        Ninja_Forms()->update_setting('smartsheet_part_' . $key, $value);
+        		}
+	        }
+        }
     }
+
+//	add_filter('ninja_forms_submit_data', 'form_submit' );
+//
+//    function form_submit($data) {
+//		$data['form']['title'] = 'aaddeeda112233';
+//    	xdebug_var_dump($data);
+//    	return $data;
+//    }
+
+	add_filter('ninja_forms_save_form', 'form_publish');
+
+    function form_publish($id) {
+    	$form = Ninja_Forms()->form($id)->get();
+    	$objects = Ninja_Forms()->form($id)->get_objects();
+
+    	$actions = Ninja_Forms()->form($id)->get_actions();
+    	$fields = Ninja_Forms()->form($id)->get_fields();
+//    	$settings = $form->get_settings();
+	    //check to see if we have a smartsheet id
+	    //get smartsheet id
+	    //set key as smartsheet_id
+	    //set values for fields
+	    $form->update_setting('key', 'random_value_yes');
+	    $form->save();
+	    foreach( $fields as $field ) {
+	    	$field_settings = $field->get_settings();
+	    }
+
+    }
+
+
+
+
 
     /**
      * The main function responsible for returning The Highlander Plugin
@@ -208,4 +258,6 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
     }
 
     NF_Smartsheet();
+
+
 }
