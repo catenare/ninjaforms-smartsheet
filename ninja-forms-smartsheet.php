@@ -88,7 +88,7 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
              * Required for all Extensions.
              */
             add_action( 'admin_init', array( $this, 'setup_license') );
-	        
+
 
             /*
              * Optional. If your extension processes or alters form submission data on a per form basis...
@@ -97,7 +97,6 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
             add_filter('ninja_forms_plugin_settings', array($this, 'plugin_settings'));
             add_filter('ninja_forms_plugin_settings_groups', array($this, 'plugin_settings_groups'));
             add_filter('ninja_forms_update_setting_smartsheet', array($this, 'save_smartsheet_settings'));
-//	        add_action( 'ninja_forms_after_submission', array($this,'ninja_forms_after_submission') );
 
         }
 
@@ -107,7 +106,7 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
          */
         public function register_actions($actions)
         {
-            $actions[ 'smartsheet' ] = new NF_Smartsheet_Actions_SmartsheetExample(); // includes/Actions/SmartsheetExample.php
+            $actions[ 'smartsheet' ] = new NF_Smartsheet_Actions_Smartsheet(); // includes/Actions/Smartsheet.php
 
             return $actions;
         }
@@ -220,26 +219,24 @@ if( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) ||
 	add_filter('ninja_forms_save_form', 'form_publish');
 
     function form_publish($id) {
+
     	$form = Ninja_Forms()->form($id)->get();
-    	$objects = Ninja_Forms()->form($id)->get_objects();
+    	$model = Ninja_Forms()->form($id)->get_model($id, 'form');
 
     	$actions = Ninja_Forms()->form($id)->get_actions();
     	$fields = Ninja_Forms()->form($id)->get_fields();
-//    	$settings = $form->get_settings();
-	    //check to see if we have a smartsheet id
-	    //get smartsheet id
-	    //set key as smartsheet_id
-	    //set values for fields
+
 	    $form->update_setting('key', 'random_value_yes');
 	    $form->save();
+
 	    foreach( $fields as $field ) {
 	    	$field_settings = $field->get_settings();
+	    	$setting = 'smartsheet' . rand();
+	    	$field->update_setting('smartsheet',$setting)->save();
+	    	$current_settings = $field->get_settings();
 	    }
 
     }
-
-
-
 
 
     /**

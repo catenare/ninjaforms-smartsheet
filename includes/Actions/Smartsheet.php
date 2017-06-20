@@ -4,7 +4,7 @@ use SmartSheet\SmartSheet;
 /**
  * Class NF_Action_SmartsheetExample
  */
-final class NF_Smartsheet_Actions_SmartsheetExample extends NF_Abstracts_Action
+final class NF_Smartsheet_Actions_Smartsheet extends NF_Abstracts_Action
 {
     /**
      * @var string
@@ -50,23 +50,16 @@ final class NF_Smartsheet_Actions_SmartsheetExample extends NF_Abstracts_Action
     public function save( $action_settings )
     {
 
-//    	$data['name'] = 'test_form_1';
-//    	$data['columns'] = [
-//	        ['title'=>'Favorite','type' => 'TEXT_NUMBER'],
-//		    ['title'=>'Primary Column', 'primary'=>true, 'type' => 'TEXT_NUMBER']
-//	    ];
-//
-//    	$result = $this->smartsheet->createSheet($data);
-//    	error_log( $result );
-//    	save the result
-
-//		error_log( var_export( $action_settings ) );
     }
 
     public function process( $action_settings, $form_id, $data )
     {
-//        xdebug_var_dump($data);
-
+    	//get the form
+	    $form = Ninja_Forms()->form($form_id)->get();
+	    $smartsheet_id = $form->get_settings('key');
+	    if ( isset( $smartsheet_id ) ) {
+	    	//save the row to smartsheet.
+	    }
     	return $data;
     }
 }
