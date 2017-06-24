@@ -29,7 +29,9 @@ final class NF_Smartsheet_Actions_Smartsheet extends NF_Abstracts_Action {
 	 */
 	protected $_priority = '10';
 
-
+	/**
+	 * @var \SmartSheet\SmartSheet
+	 */
 	protected $smartsheet;
 
 	/**
@@ -40,7 +42,7 @@ final class NF_Smartsheet_Actions_Smartsheet extends NF_Abstracts_Action {
 	public function __construct( $smartsheet = null ) {
 		parent::__construct();
 
-
+		$this->smartsheet = $smartsheet;
 		$this->_nicename  = __( 'Save to Smartsheet', 'ninja-forms' );
 	}
 

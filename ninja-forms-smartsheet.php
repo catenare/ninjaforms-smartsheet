@@ -143,8 +143,8 @@ if ( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) |
 		 * @return mixed
 		 */
 		public function register_actions( $actions ) {
-			$actions['smartsheet'] = new NF_Smartsheet_Actions_Smartsheet(); // includes/Actions/Smartsheet.php
-
+			$actions['smartsheet'] = new NF_Smartsheet_Actions_Smartsheet( $this->smartsheet );
+			// includes/Actions/Smartsheet.php
 			return $actions;
 		}
 

@@ -117,11 +117,4 @@ class SmartSheetRow {
 		}
 		return $result;
 	}
-
-	/*
-	 * https://api.smartsheet.com/2.0/sheets/{sheetId}/rows
-	 * '[{"toTop":true, "cells": [ {"columnId": 7960873114331012, "value": true}, {"columnId": 642523719853956, "value": "New status", "strict": false} ] }, {"toTop":true, "cells": [ {"columnId": 7960873114331012, "value": true}, {"columnId": 642523719853956, "value": "New status", "strict": false} ] }]'
-	 */
-
-
 }
