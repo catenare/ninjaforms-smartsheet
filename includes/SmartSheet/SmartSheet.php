@@ -14,8 +14,6 @@ namespace NinjaForm;
  * Add new SmartSheet when creating new NinjaForm
  */
 
-use Symfony\Component\DependencyInjection\Tests\Compiler\F;
-
 define( 'FIELD_TYPES', array(
 	'checkbox' => 'CHECKBOX',
 	'date'     => 'DATE',
@@ -109,6 +107,18 @@ class SmartSheet {
 		return $result;
 	}
 
+	/**
+	 * Get current fields from form
+	 * @return array
+	 */
+	private function getFields() {
+		return $this->fields;
+	}
+
+	/**
+	 * Create array of columns to store in smartsheet
+	 * @return array
+	 */
 	private function getColumnsForSmartsheet( ) {
 		$columns = array();
 		foreach( $this->getFields() as $field ) {

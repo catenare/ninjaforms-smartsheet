@@ -6,7 +6,6 @@ require 'vendor/autoload.php';
 use SmartSheet\SmartSheet;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use NinjaForm\SmartSheet;
 
 
 /*
@@ -257,7 +256,7 @@ if ( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) |
 		 *
 		 * @param $id
 		 */
-		public function form_pubish( $id ) {
+		public function form_publish( $id ) {
 			$smartsheet = new \NinjaForm\SmartSheet($this->smartsheet, $id);
 			if ( $smartsheet->getIsNewForm() && $smartsheet->getIsSmartsheetAction() ) {
 				$data = $smartsheet->getDataForSmartsheet();
@@ -266,141 +265,6 @@ if ( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) |
 				$smartsheet->updateSheetSmartsheetId();
 			}
 		}
-
-		/**
-		 * @param $id
-		 */
-//		public function form_publish( $id ) {
-//
-//			$form  = Ninja_Forms()->form( $id )->get();
-//			$model = Ninja_Forms()->form( $id )->get_model( $id, 'form' );
-//			$key   = $model->get_setting( self::SMARTSHEET_KEY );
-//
-////			if (substr($key, 0, strlen(self::SMARTSHEET_KEY))  === self::SMARTSHEET_KEY) {
-////				return;
-////			}
-//
-//			$actions = Ninja_Forms()->form( $id )->get_actions();
-//			$result  = $this->check_action( $actions );
-//
-//			if ( $result ) {
-//
-//				$fields               = Ninja_Forms()->form( $id )->get_fields();
-//				$columns              = $this->create_column_array( $fields );
-//				$form_data            = array( 'name' => $form->get_setting( 'title' ) );
-//				$form_data['name']    = $form->get_setting( 'title' );
-//				$form_data['columns'] = $columns;
-//				$smartsheet           = $this->create_smartsheet( $form_data );
-//				$model->update_setting( self::SMARTSHEET_KEY,  self::SMARTSHEET_KEY . '_' . $smartsheet->result->id )
-//				      ->save();
-//				$setting              = $this->process_smartsheet_columns( $fields, $smartsheet->result->columns );
-//			}
-//
-//		}
-
-		/**
-		 * @param $actions
-		 *
-		 * @return bool
-		 */
-//		protected function check_action( $actions ) {
-//			$result = false;
-//			foreach ( $actions as $action ) {
-//				$setting = $action->get_setting( 'type' );
-//				$active  = $action->get_setting( 'active' );
-//				if ( $setting == self::SMARTSHEET_KEY && $active == 1 ) {
-//					$result = true;
-//				}
-//			}
-//
-//			return $result;
-//		}
-
-		/**
-		 * @param $fields
-		 *
-		 * @return array
-		 */
-//		protected function create_column_array( $fields ) {
-//			$columns = array();
-//			foreach ( $fields as $field ) {
-//				$column          = array();
-//				$column['title'] = $field->get_setting( 'label' );
-//				$type            = $field->get_setting( 'type' );
-//				if ( $type !== 'submit' ) {
-//					if ( in_array( $type, FIELD_TYPES ) ) {
-//						$current_type = FIELD_TYPES[ $type ];
-//					} else {
-//						$current_type = 'TEXT_NUMBER';
-//					}
-//					$column['type'] = $current_type;
-//					if ( $field->get_setting( 'order' ) == 1 ) {
-//						$column['primary'] = true;
-//					}
-//					$columns[] = $column;
-//				}
-//			}
-//
-//			return $columns;
-//		}
-
-//		/**
-//		 * @param $fields
-//		 *
-//		 * @return string
-//		 */
-//		protected function process_smartsheet_columns( $fields, $result_columns ) {
-//			$smartsheet_array = $this->get_smartsheet_field_array($result_columns);
-//
-//			foreach ( $fields as $field ) {
-//				$setting = self::SMARTSHEET_KEY . '_' . $smartsheet_array[$field->get_setting('label')];
-//				$field->update_setting( self::SMARTSHEET_KEY, $setting )->save();
-//			}
-//
-//			return $setting;
-//		}
-
-//		protected function get_smartsheet_field_array( $result_columns ) {
-//			$column_array = [];
-//			foreach( $result_columns as $column ) {
-//				$column_array[$column->title] = $column->id;
-//			}
-//			$this->smartsheet_field_array_by_label = $column_array;
-//			return $this->smartsheet_field_array_by_label;
-//		}
-
-//		protected function get_setting() {
-//			/*
-//			 * 0
-//			 * id
-//			 * index
-//			 * title
-//			 * 1
-//			 */
-//			/*
-//			 * field
-//			 * setting - label
-//			 * setting - key
-//			 * order
-//			 * where title == label
-//			 * return id
-//			 */
-//
-//			return $setting;
-//		}
-
-		/**
-		 * @param $form_data
-		 *
-		 * @return mixed
-		 */
-//		protected function create_smartsheet( $form_data ) {
-//			$result = null;
-//			$this->logger->info('form data', $form_data );
-//			$response = $this->smartsheet->createSheet($form_data);
-//			$result = \Zend\Json\Json::decode($response->getBody());
-//			return $result;
-//		}
 	}
 
 
