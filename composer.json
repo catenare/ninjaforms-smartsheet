@@ -25,5 +25,8 @@
       "type": "vcs",
       "url": "https://github.com/catenare/smartsheet-api"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": { "NinjaForm\\": "includes/SmartSheet" }
+  }
 }
