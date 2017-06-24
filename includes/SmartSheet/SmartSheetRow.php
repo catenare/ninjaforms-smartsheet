@@ -95,12 +95,12 @@ class SmartSheetRow {
 	 * @return array
 	 */
 	private function setDataRowArray() {
-		$result = array("toTop" => true);
-		$cells  = array();
+		$result["toTop"] = True;
 		foreach ( $this->getDataRow() as $data_field ) {
+			$cells  = array();
 			$cells['columnId'] = $data_field->getColumnId();
 			$cells['value'] = $data_field->getValue();
-			$result[] = $cells;
+			$result["cells"][] = $cells;
 		}
 		$this->data_row_array = $result;
 		return $this->data_row_array;

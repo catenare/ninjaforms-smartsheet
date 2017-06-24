@@ -11,6 +11,7 @@ define('SMARTSHEET_KEY', 'smartsheet');
 define('FORM', 'form');
 define('FIELDS', 'fields');
 define('SMARTSHEET_DELIMITER', '_');
+define('SMARTSHEET_ID', 'id');
 
 
 /*
