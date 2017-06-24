@@ -1,25 +1,26 @@
 {
-    "name": "catenare/ninjaforms-smartsheet-plugin",
-    "description": "Add form data to smartsheet",
-    "type": "wordpress-plugin",
-    "license": "proprietary",
-    "authors": [
+  "name": "catenare/ninjaforms-smartsheet-plugin",
+  "description": "Add form data to smartsheet",
+  "type": "wordpress-plugin",
+  "license": "proprietary",
+  "authors": [
     {
-        "name": "Johan Martin",
-        "homepage": "http://www.johan-martin.com",
-        "email": "martin.johan@johan-martin.com",
-        "role": "developer"
+      "name": "Johan Martin",
+      "homepage": "http://www.johan-martin.com",
+      "email": "martin.johan@johan-martin.com",
+      "role": "developer"
     }
-    ],
-    "keywords":[
-        "alicart",
-        "ninja-forms",
-        "smartsheet"
-    ],
-    "require": {
-        "catenare/smartsheet": "dev-master"
-    },
-    "repositories": [
+  ],
+  "keywords": [
+    "alicart",
+    "ninja-forms",
+    "smartsheet"
+  ],
+  "require": {
+    "catenare/smartsheet": "dev-master",
+    "monolog/monolog": "^1.23"
+  },
+  "repositories": [
     {
       "type": "vcs",
       "url": "https://github.com/catenare/smartsheet-api"
