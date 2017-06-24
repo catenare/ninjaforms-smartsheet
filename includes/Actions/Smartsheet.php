@@ -3,6 +3,7 @@
 }
 
 use SmartSheet\SmartSheet;
+use NinjaForm\SmartSheetRow;
 
 /**
  * Class NF_Action_SmartsheetExample
@@ -41,26 +42,9 @@ final class NF_Smartsheet_Actions_Smartsheet extends NF_Abstracts_Action {
 
 
 		$this->_nicename  = __( 'Save to Smartsheet', 'ninja-forms' );
-		$this->smartsheet = $smartsheet;
 	}
 
 	static function form_save( $id ) {
-
-		$form  = Ninja_Forms()->form( $id )->get();
-		$model = Ninja_Forms()->form( $id )->get_model( $id, 'form' );
-
-		$actions = Ninja_Forms()->form( $id )->get_actions();
-		$fields  = Ninja_Forms()->form( $id )->get_fields();
-
-		$form->update_setting( 'key', 'random_value_yes' );
-		$form->save();
-
-		foreach ( $fields as $field ) {
-			$field_settings = $field->get_settings();
-			$setting        = 'smartsheet' . rand();
-			$field->update_setting( 'smartsheet', $setting )->save();
-			$current_settings = $field->get_settings();
-		}
 	}
 
 	/*
@@ -71,14 +55,18 @@ final class NF_Smartsheet_Actions_Smartsheet extends NF_Abstracts_Action {
 
 	}
 
+	/**
+	 * Save ninjaform entry to SmartSheet
+	 * @param $action_settings
+	 * @param $form_id
+	 * @param $data
+	 *
+	 * @return mixed
+	 */
 	public function process( $action_settings, $form_id, $data ) {
-		//get the form
-		$form          = Ninja_Forms()->form( $form_id )->get();
-		$smartsheet_id = $form->get_settings( 'key' );
-		if ( isset( $smartsheet_id ) ) {
-			//save the row to smartsheet.
-		}
-
+		$row = new SmartSheetRow( $form_id, $data);
+		$smartsheet_id = $row->getSmartSheetFormId();
+		$data_row = $row->getDataRowArray();
 		return $data;
 	}
 }

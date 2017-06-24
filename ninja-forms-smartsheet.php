@@ -7,6 +7,11 @@ use SmartSheet\SmartSheet;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
+define('SMARTSHEET_KEY', 'smartsheet');
+define('FORM', 'form');
+define('FIELDS', 'fields');
+define('SMARTSHEET_DELIMITER', '_');
+
 
 /*
  * Plugin Name: Ninja Forms - smartsheet
@@ -110,7 +115,7 @@ if ( version_compare( get_option( 'ninja_forms_version', '0.0.0' ), '3', '<' ) |
 
 			$this->smartsheet = new SmartSheet( $token, $url );
 
-			$this->logger = new Logger( 'smartsheet' );
+			$this->logger = new Logger( SMARTSHEET_KEY );
 			$path         = __DIR__ . DIRECTORY_SEPARATOR . 'log' . DIRECTORY_SEPARATOR . 'output.log';
 			$this->logger->pushHandler( new StreamHandler( $path, Logger::DEBUG ) );
 

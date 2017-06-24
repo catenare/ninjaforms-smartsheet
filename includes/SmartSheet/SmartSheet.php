@@ -14,6 +14,7 @@ namespace NinjaForm;
  * Add new SmartSheet when creating new NinjaForm
  */
 
+
 define( 'FIELD_TYPES', array(
 	'checkbox' => 'CHECKBOX',
 	'date'     => 'DATE',
@@ -210,8 +211,8 @@ class SmartSheet {
 	public function updateColumnSettingWithSmartsheetId() {
 		$columns = $this->getSmartsheetColumnArray();
 		foreach( $this->fields as $field ) {
-			$setting = self::SMARTSHEET_KEY . '_' . $columns[$field->get_setting(self::LABEL)];
-			$field->update_setting( self::SMARTSHEET_KEY, $setting)->save();
+			$setting = SMARTSHEET_KEY . SMARTSHEET_DELIMITER . $columns[$field->get_setting(self::LABEL)];
+			$field->update_setting( SMARTSHEET_KEY, $setting)->save();
 		}
 	}
 
@@ -219,7 +220,11 @@ class SmartSheet {
 	 * Update the NinjaForm with the smartsheet form id
 	 */
 	public function updateSheetSmartsheetId() {
-		$this->model->update_setting(self::SMARTSHEET_KEY, self::SMARTSHEET_KEY . '_' . $this->getSmartsheetSubmitResult()->result->id)->save();
+		$this->model->update_setting(
+			SMARTSHEET_KEY, SMARTSHEET_KEY
+			                . SMARTSHEET_DELIMITER
+			                . $this->getSmartsheetSubmitResult()->result->id
+		)->save();
 	}
 
 }
