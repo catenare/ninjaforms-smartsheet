@@ -17,7 +17,7 @@
     "smartsheet"
   ],
   "require": {
-    "catenare/smartsheet": "dev-master",
+    "catenare/smartsheet": "~1.0",
     "monolog/monolog": "^1.23"
   },
   "repositories": [
