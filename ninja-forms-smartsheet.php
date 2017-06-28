@@ -5,7 +5,7 @@
 if ( !defined('ABSPATH') )
 	define('ABSPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 
-require ABSPATH . 'vendor' . DIRECTORY_SEPARATOR. 'autoload.php';
+require ABSPATH . '..' . DIRECTORY_SEPARATOR .  'vendor' . DIRECTORY_SEPARATOR. 'autoload.php';
 use SmartSheet\SmartSheet;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
